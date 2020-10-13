@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family:'Poppins', sans-serif;
+}
+
+#content {
+    display: flex;
+
+}
+.details-section {
+    flex: 60%;
+}
+.details-section, .image-section {
+    padding: 2em 1em;
+}
+.date-search-section {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.date {
+    color:  #000;
+    font-size: 2em;
+}
+.search {
+    border-radius: 8px;
+    border-color: gainsboro;
+    box-shadow: 1px 1px 1px 1px white;
+}
+.current-weather {
+    display: flex;
+}
+.temp-display {
+    color: #e8960a;
+    font-size: 1em;
+}
+.weather-icon {
+    font-size: 1em;
+}
+.weekly-forecast {
+    display: flex;
+}
+.image-section {
+    flex: 40%;
+}
