@@ -1,3 +1,22 @@
+import getWeather from './apirequest';
+import sideImage from './img/sideImage.jpeg';
+
+const addDataToPage = (obj) => {
+  const imageLink = 'http://openweathermap.org/img/wn/';
+  const details = document.querySelector('.details-section');
+  const currentWeather = document.createElement('div');
+  currentWeather.className = 'current-weather';
+  const tempDisplay = document.createElement('div');
+  tempDisplay.className = 'temp-display';
+  tempDisplay.textContent = `${obj.main.temp} F`;
+  const weatherIcon = document.createElement('img');
+  weatherIcon.className = 'weather-icon';
+  weatherIcon.src = `${imageLink}${obj.weather[0].icon}@2x.png`;
+  currentWeather.appendChild(tempDisplay);
+  currentWeather.appendChild(weatherIcon);
+
+  details.appendChild(currentWeather);
+};
 const detailSection = () => {
   const details = document.createElement('div');
   details.className = 'details-section';
@@ -6,40 +25,34 @@ const detailSection = () => {
   dateAndSearchSection.className = 'date-search-section';
   const date = document.createElement('div');
   date.className = 'date';
-  date.textContent = 'Tuesday October 13th';
+  date.textContent = new Date().toDateString();
+  const searchContainer = document.createElement('div');
+  searchContainer.className = 'search';
   const search = document.createElement('input');
-  search.className = 'search';
   search.required = 'true';
-  search.placeholder = 'Location';
-
+  search.setAttribute('type', 'text');
+  search.setAttribute('placeholder', 'Location');
+  searchContainer.appendChild(search);
   dateAndSearchSection.appendChild(date);
-  dateAndSearchSection.appendChild(search);
-
-  const currentWeather = document.createElement('div');
-  currentWeather.className = 'current-weather';
-  const tempDisplay = document.createElement('div');
-  tempDisplay.className = 'temp-display';
-  const weatherIcon = document.createElement('div');
-  weatherIcon.className = 'weather-icon';
-
-  currentWeather.appendChild(tempDisplay);
-  currentWeather.appendChild(weatherIcon);
-
-  const weeklyForecast = document.createElement('div');
-  weeklyForecast.className = 'weekly-forecast';
-
+  dateAndSearchSection.appendChild(searchContainer);
   details.appendChild(dateAndSearchSection);
-  details.appendChild(currentWeather);
-  details.appendChild(weeklyForecast);
+  search.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      getWeather(search.value).then((data) => addDataToPage(data));
+    }
+  });
 
   const getContentDiv = document.querySelector('#content');
   getContentDiv.appendChild(details);
 };
 const imageSection = () => {
-  const image = document.createElement('div');
-  image.className = 'image-section';
-  image.textContent = 'Image goes here';
+  const imageDiv = document.createElement('div');
+  imageDiv.className = 'image-section';
+  const image = new Image();
+  image.src = sideImage;
+  image.className = 'image';
+  imageDiv.appendChild(image);
   const getContentDiv = document.querySelector('#content');
-  getContentDiv.appendChild(image);
+  getContentDiv.appendChild(imageDiv);
 };
 export { detailSection, imageSection };
