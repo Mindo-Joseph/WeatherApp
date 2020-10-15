@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
-import getWeather, { fToC } from './apirequest';
+import getWeather, {
+  fetchCoordinates, fToC, getCurrentLocationWeather, getCurrentPosition,
+} from './apirequest';
 import sideImage from './img/sideImage.jpeg';
 
 const toggleTemp = (obj, node) => {
@@ -38,9 +40,12 @@ const addDataToPage = (obj) => {
   weatherDescription.textContent = `Description: ${obj.weather[0].description}`;
   const humidity = document.createElement('p');
   humidity.textContent = `Humidity: ${obj.main.humidity}`;
+  const winspeed = document.createElement('p');
+  winspeed.textContent = `Wind ${obj.wind.speed} MPH`;
   otherDetails.appendChild(cityName);
   otherDetails.appendChild(weatherDescription);
   otherDetails.appendChild(humidity);
+  otherDetails.appendChild(winspeed);
   currentWeather.appendChild(tempDisplay);
   currentWeather.appendChild(weatherIcon);
 
@@ -78,6 +83,10 @@ const detailSection = () => {
     }
   });
 
+  const coordinates = fetchCoordinates();
+  // eslint-disable-next-line max-len
+  coordinates.then((data) => getCurrentLocationWeather(data.response.coords.latitude, data.response.coords.longitude)
+    .then((weather) => addDataToPage(weather)));
   const getContentDiv = document.querySelector('#content');
   getContentDiv.appendChild(details);
 };
