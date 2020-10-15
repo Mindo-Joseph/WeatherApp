@@ -21,6 +21,7 @@ const addDataToPage = (obj) => {
   tempDisplay.textContent = `${obj.main.temp} F`;
   const toggleButton = document.createElement('button');
   toggleButton.textContent = 'Celcius/Farenheight';
+  toggleButton.className = 'toggle-btn';
   toggleButton.addEventListener('click', () => {
     toggleTemp(obj, tempDisplay);
   });
@@ -50,7 +51,6 @@ const addDataToPage = (obj) => {
 const detailSection = () => {
   const details = document.createElement('div');
   details.className = 'details-section';
-
   const dateAndSearchSection = document.createElement('div');
   dateAndSearchSection.className = 'date-search-section';
   const date = document.createElement('div');
@@ -68,7 +68,13 @@ const detailSection = () => {
   details.appendChild(dateAndSearchSection);
   search.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-      getWeather(search.value).then((data) => addDataToPage(data));
+      const detail = document.querySelector('.details-section');
+      if (detail.hasChildNodes()) {
+        while (detail.children[1]) {
+          detail.removeChild(detail.lastChild);
+        }
+        getWeather(search.value).then((data) => addDataToPage(data));
+      }
     }
   });
 
