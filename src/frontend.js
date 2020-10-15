@@ -84,9 +84,11 @@ const detailSection = () => {
   });
 
   const coordinates = fetchCoordinates();
-  // eslint-disable-next-line max-len
-  coordinates.then((data) => getCurrentLocationWeather(data.response.coords.latitude, data.response.coords.longitude)
-    .then((weather) => addDataToPage(weather)));
+
+  coordinates.then(
+    (dt) => getCurrentLocationWeather(dt.response.coords.latitude, dt.response.coords.longitude)
+      .then((weather) => addDataToPage(weather)),
+  ).catch((error) => error);
   const getContentDiv = document.querySelector('#content');
   getContentDiv.appendChild(details);
 };
