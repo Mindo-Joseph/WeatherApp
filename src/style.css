@@ -2,38 +2,44 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   font-family: "Poppins", sans-serif;
 }
+
 p {
   font-weight: 600;
 }
+
 #content {
   display: flex;
   margin: 30px auto;
   width: 95%;
   height: 50%;
   border-radius: 40px;
-  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
-    -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   transition: 0.4s;
 }
+
 .details-section {
   flex: 60%;
 }
-.details-section,
-.image-section {
+
+.details-section, .image-section {
   padding: 2em 1em;
 }
+
 .date-search-section {
   display: flex;
   justify-content: space-evenly;
 }
+
 .date {
   color: #000;
   font-size: 2em;
 }
+
 .search {
   border: 1px solid #c4c4c4;
   width: 200px;
@@ -44,6 +50,7 @@ p {
   position: relative;
   left: 10%;
 }
+
 .search input {
   width: 300px;
   height: 65px;
@@ -58,15 +65,18 @@ p {
   justify-content: center;
   align-items: center;
 }
+
 .other-details {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .other-details p {
   margin-right: 1em;
   margin-top: 1.5em;
 }
+
 .temp-display {
   color: #e8960a;
   font-size: 3em;
@@ -75,12 +85,15 @@ p {
 .weekly-forecast {
   display: flex;
 }
+
 .image-section {
   padding: 1em;
 }
+
 .image {
   height: 400px;
 }
+
 .toggle-btn {
   display: inline-block;
   vertical-align: middle;
