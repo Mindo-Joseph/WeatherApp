@@ -1,5 +1,15 @@
-import getWeather from './apirequest';
+/* eslint-disable no-param-reassign */
+import getWeather, { fToC } from './apirequest';
 import sideImage from './img/sideImage.jpeg';
+
+const toggleTemp = (obj, node) => {
+  const tempCelcius = fToC(obj.main.temp);
+  if (node.textContent.endsWith('F')) {
+    node.textContent = `${tempCelcius} C`;
+  } else {
+    node.textContent = `${obj.main.temp} F`;
+  }
+};
 
 const addDataToPage = (obj) => {
   const imageLink = 'http://openweathermap.org/img/wn/';
@@ -9,13 +19,33 @@ const addDataToPage = (obj) => {
   const tempDisplay = document.createElement('div');
   tempDisplay.className = 'temp-display';
   tempDisplay.textContent = `${obj.main.temp} F`;
+  const toggleButton = document.createElement('button');
+  toggleButton.textContent = 'Celcius/Farenheight';
+  toggleButton.addEventListener('click', () => {
+    toggleTemp(obj, tempDisplay);
+  });
+
   const weatherIcon = document.createElement('img');
   weatherIcon.className = 'weather-icon';
   weatherIcon.src = `${imageLink}${obj.weather[0].icon}@2x.png`;
+
+  const otherDetails = document.createElement('div');
+  otherDetails.className = 'other-details';
+  const cityName = document.createElement('p');
+  cityName.textContent = `City: ${obj.name}`;
+  const weatherDescription = document.createElement('p');
+  weatherDescription.textContent = `Description: ${obj.weather[0].description}`;
+  const humidity = document.createElement('p');
+  humidity.textContent = `Humidity: ${obj.main.humidity}`;
+  otherDetails.appendChild(cityName);
+  otherDetails.appendChild(weatherDescription);
+  otherDetails.appendChild(humidity);
   currentWeather.appendChild(tempDisplay);
   currentWeather.appendChild(weatherIcon);
 
   details.appendChild(currentWeather);
+  details.appendChild(toggleButton);
+  details.appendChild(otherDetails);
 };
 const detailSection = () => {
   const details = document.createElement('div');
