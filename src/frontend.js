@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import getWeather, {
-  fetchCoordinates, fToC, getCurrentLocationWeather, getCurrentPosition,
+  fetchCoordinates, fToC, getCurrentLocationWeather,
 } from './apirequest';
 import sideImage from './img/sideImage.jpeg';
 
@@ -72,7 +72,7 @@ const detailSection = () => {
   dateAndSearchSection.appendChild(searchContainer);
   details.appendChild(dateAndSearchSection);
   search.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && search.value.trim().length !== 0) {
       const detail = document.querySelector('.details-section');
       if (detail.hasChildNodes()) {
         while (detail.children[1]) {
